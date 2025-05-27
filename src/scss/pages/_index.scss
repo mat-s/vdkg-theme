@@ -1,0 +1,12 @@
+/**
+ * File: _index.scss
+ * Description: Central export file for all page-specific SCSS modules.
+ *
+ * Dependencies:
+ * - Individual page styles (to be added via @forward)
+ *
+ * Usage:
+ * Forwarded into styles.scss using @use 'pages/index'
+*/
+
+@forward 'all_pages';

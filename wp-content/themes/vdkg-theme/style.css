@@ -1,0 +1,148 @@
+/*
+Theme Name: VDKG Theme
+Theme URI: https://www.doryo.de/vdkg-theme
+Description: Ein individuelles Child Theme basierend auf Hello Elementor. Enthält ein modernes Vite-Setup mit SCSS und JavaScript.
+Author: Matthias Seidel
+Author URI: https://www.doryo.de
+Template: hello-elementor
+Version: 1.0.0
+Text Domain: vdkg-theme
+License: GNU General Public License v3 or later
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
+Tags: custom, responsive, modern, vite, scss, javascript
+*/
+@charset "UTF-8";
+/**
+ * File: styles.scss
+ * Description: Main SCSS entry point. Imports all abstracts, partials, pages, and widgets.
+ *
+ * Dependencies:
+ * - abstracts/index.scss
+ * - partials/*
+ * - widgets/* (optional)
+ * - pages/* (optional)
+ *
+ * Usage:
+ * This file is compiled via Gulp and outputs to style.css
+*/
+/**
+ * File: _index.scss
+ * Description: Central export file for all abstract SCSS modules (e.g. mixins, variables).
+ *
+ * Dependencies:
+ * - mixins.scss
+ *
+ * Usage:
+ * Forwarded into styles.scss using @use 'abstracts/index' (note: no leading underscore required).
+*/
+/**
+ * File: mixins.scss
+ * Description: Global mixins for media queries and layout helpers.
+ *
+ * Dependencies:
+ * - none
+ *
+ * Usage:
+ * Used via @forward in abstracts/index.scss and @use in styles.scss or partials.
+*/
+/**
+ * File: _index.scss
+ * Description: Central export file for all partial SCSS modules (e.g. header, footer).
+ *
+ * Dependencies:
+ * - header.scss
+ * - footer.scss
+ *
+ * Usage:
+ * Forwarded into styles.scss using @use 'partials/index'
+*/
+/**
+ * File: styles.scss
+ * Description: Main SCSS entry point. Imports all abstracts, partials, pages, and widgets.
+ *
+ * Dependencies:
+ * - abstracts/index.scss
+ * - partials/*
+ * - widgets/* (optional)
+ * - pages/* (optional)
+ *
+ * Usage:
+ * This file is compiled via Gulp and outputs to style.css
+*/
+/**
+ * File: footer.scss
+ * Description: Styles for the site footer
+ *
+ * Dependencies:
+ * - abstracts/index.scss (for mixins, variables, etc.)
+ *
+ * Usage:
+ * Used via @use 'partials/footer' in styles.scss
+*/
+/**
+ * File: styles.scss
+ * Description: Main SCSS entry point. Imports all abstracts, partials, pages, and widgets.
+ *
+ * Dependencies:
+ * - abstracts/index.scss
+ * - partials/*
+ * - widgets/* (optional)
+ * - pages/* (optional)
+ *
+ * Usage:
+ * This file is compiled via Gulp and outputs to style.css
+*/
+/**
+ * File: header.scss
+ * Description: Styles for the site header.
+ *
+ * Dependencies:
+ * - abstracts/index.scss (for mixins, variables, etc.)
+ *
+ * Usage:
+ * Used via @use 'partials/header' in styles.scss
+*/
+/**
+ * File: _index.scss
+ * Description: Central export file for all page-specific SCSS modules.
+ *
+ * Dependencies:
+ * - Individual page styles (to be added via @forward)
+ *
+ * Usage:
+ * Forwarded into styles.scss using @use 'pages/index'
+*/
+/**
+ * File: styles.scss
+ * Description: Main SCSS entry point. Imports all abstracts, partials, pages, and widgets.
+ *
+ * Dependencies:
+ * - abstracts/index.scss
+ * - partials/*
+ * - widgets/* (optional)
+ * - pages/* (optional)
+ *
+ * Usage:
+ * This file is compiled via Gulp and outputs to style.css
+*/
+/****
+ * File: all_pages.scss
+ * Description: Shared styles applied across multiple pages in the Ravensbrück project.
+ *
+ * Dependencies:
+ * - abstracts/index.scss (for global mixins, variables, etc.)
+ *
+ * Usage:
+ * Used via @use in styles.scss to apply common layout or reset rules.
+ */
+/**
+ * File: _index.scss
+ * Description: Central export file for all widget-specific SCSS modules.
+ *
+ * Dependencies:
+ * - rvnsbrck-image.scss
+ *
+ * Usage:
+ * Forwarded into styles.scss using @use 'widgets/index'
+*/
+/*# sourceMappingURL=style.css.map */

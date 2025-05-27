@@ -1,0 +1,11 @@
+/****
+ * File: all_pages.scss
+ * Description: Shared styles applied across multiple pages in the Ravensbrück project.
+ *
+ * Dependencies:
+ * - abstracts/index.scss (for global mixins, variables, etc.)
+ *
+ * Usage:
+ * Used via @use in styles.scss to apply common layout or reset rules.
+ */
+@use '../abstracts/index' as *;

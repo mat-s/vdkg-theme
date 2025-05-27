@@ -1,0 +1,47 @@
+# macOS
+.DS_Store
+
+# Local files
+*.sql
+upload.ini
+ffmpeg.txt
+
+# Passwords
+.htaccess
+.htpasswd
+
+# Core WordPress (nicht ins Repo)
+html/
+
+# Themes – Nur eigene Themes reinnehmen
+wp-content/index.php
+wp-content/themes/twentytwentyfive/
+wp-content/themes/twentytwentyfour/
+wp-content/themes/twentytwentythree/
+wp-content/themes/twentytwentytwo/
+
+# Logs & Debug
+wp-content/debug.log
+html/wp-content/debug.log
+
+# WordPress generated
+html/wp-content/uploads/
+html/wp-content/cache/
+html/wp-content/languages/
+html/wp-content/wflogs/
+html/wp-content/uploads/elementor/
+html/wp-content/uploads/matomo/
+wp-content/languages/
+wp-content/uploads/
+
+# Vite build output
+html/wp-content/themes/hello-child-theme/dist/
+
+# Node modules
+node_modules/
+
+# Docker runtime cache (optional)
+docker-runtime/
+
+# Env files
+.env

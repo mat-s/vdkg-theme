@@ -1,0 +1,27 @@
+/**
+ * File: styles.scss
+ * Description: Main SCSS entry point. Imports all abstracts, partials, pages, and widgets.
+ *
+ * Dependencies:
+ * - abstracts/index.scss
+ * - partials/*
+ * - widgets/* (optional)
+ * - pages/* (optional)
+ *
+ * Usage:
+ * This file is compiled via Gulp and outputs to style.css
+*/
+
+// Abstracts
+@use 'abstracts/index' as *;
+
+// Partials
+@use 'partials/index' as *;
+
+// Pages
+@use 'pages/index' as *;
+
+// Widgets
+@use 'widgets/index' as *;
+
+
