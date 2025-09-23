@@ -1,77 +1,121 @@
-const gulp = require("gulp");
-const sass = require("gulp-sass")(require("sass"));
-const postcss = require("gulp-postcss");
-const autoprefixer = require("autoprefixer");
-const sourcemaps = require("gulp-sourcemaps");
-const browserSync = require("browser-sync").create();
-const header = require("gulp-header");
-const rename = require("gulp-rename");
-const uglify = require("gulp-uglify");
-const concat = require("gulp-concat");
+const gulp = require('gulp');
+const sass = require('gulp-sass')(require('sass'));
+const browserSync = require('browser-sync').create();
+const header = require('gulp-header');
+const cleanCSS = require('gulp-clean-css');
+const rename = require('gulp-rename');
+const sourcemaps = require('gulp-sourcemaps');
 
-// WordPress-Header
+// WordPress Theme Header für CSS
 const themeHeader = `/*
 Theme Name: VDKG Theme
-Description: Ein individuelles Child Theme basierend auf Hello Elementor. Enthält ein Gulp-Setup mit SCSS und JavaScript.
+Description: Starter theme for VDKG based on Hello Elementor, built with SCSS
 Author: Matthias Seidel
-Author URI: https://www.doryo.de
-Template: hello-elementor
+Author URI: https://doryo.de
 Version: 1.0.0
+Template: hello-elementor
 Text Domain: vdkg-theme
-License: GNU General Public License v3 or later
-License URI: https://www.gnu.org/licenses/gpl-3.0.html
-Tags: custom, responsive, modern, vite, scss, javascript
-*/\n`;
+*/
 
-// Pfade
+`;
+
+// Pfade definieren
 const paths = {
-  scssWatch: "./src/scss/**/*.scss",
-  scssEntry: "./src/scss/styles.scss",
-  js: "./src/js/**/*.js",
-  cssOutput: "./wp-content/themes/vdkg-theme/",
-  jsOutput: "./wp-content/themes/vdkg-theme/",
-  php: "../wp-content/themes/**/*.php",
+  scss: {
+    src: 'wp-content/themes/vdkg-theme/assets/scss/**/*.scss',
+    main: 'wp-content/themes/vdkg-theme/assets/scss/style.scss',
+    dest: 'wp-content/themes/vdkg-theme/dist/'
+  },
+  js: {
+    src: 'wp-content/themes/vdkg-theme/assets/js/**/*.js',
+    dest: 'wp-content/themes/vdkg-theme/dist/'
+  },
+  php: {
+    src: 'wp-content/themes/vdkg-theme/**/*.php'
+  }
 };
 
-// SCSS kompilieren
+// SCSS Kompilierung mit WordPress Header
 function compileSCSS() {
-  return gulp
-    .src(paths.scssEntry)
+  return gulp.src(paths.scss.main)
     .pipe(sourcemaps.init())
-    .pipe(sass().on("error", sass.logError))
-    .pipe(postcss([autoprefixer()]))
+    .pipe(sass({
+      outputStyle: 'expanded',
+      includePaths: ['node_modules']
+    }).on('error', sass.logError))
     .pipe(header(themeHeader))
-    .pipe(rename("style.css"))
-    .pipe(sourcemaps.write("."))
-    .pipe(gulp.dest(paths.cssOutput))
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest(paths.scss.dest))
     .pipe(browserSync.stream());
 }
 
-// JavaScript verarbeiten
-function processJS() {
-  return gulp
-    .src(paths.js)
-    .pipe(sourcemaps.init())
-    .pipe(concat("app.js")) // Alle JS-Dateien zusammenführen
-    .pipe(uglify()) // Minifizieren
-    .pipe(sourcemaps.write(".")) // Source-Map erstellen
-    .pipe(gulp.dest(paths.jsOutput)) // In das Theme-Root schreiben
+// SCSS Kompilierung für Production (minified)
+function compileSCSSProd() {
+  return gulp.src(paths.scss.main)
+    .pipe(sass({
+      outputStyle: 'compressed',
+      includePaths: ['node_modules']
+    }).on('error', sass.logError))
+    .pipe(cleanCSS({ level: 2 }))
+    .pipe(header(themeHeader))
+    .pipe(rename({ suffix: '.min' }))
+    .pipe(gulp.dest(paths.scss.dest));
+}
+
+// JavaScript kopieren
+function copyJS() {
+  return gulp.src(paths.js.src)
+    .pipe(gulp.dest(paths.js.dest))
     .pipe(browserSync.stream());
 }
 
-// BrowserSync starten
-function serve() {
+// LiveReload Server starten (BrowserSync)
+function startServer(done) {
   browserSync.init({
-    proxy: "http://localhost:8000", // WordPress local dev URL
+    proxy: "localhost:8080", // Passe ggf. an deine lokale WP-URL an
     open: false,
-    port: 5173,
+    notify: false
   });
-
-  // Dateien beobachten
-  gulp.watch(paths.scssWatch, compileSCSS);
-  gulp.watch(paths.js, processJS);
-  gulp.watch(paths.php).on("change", browserSync.reload);
+  done();
 }
 
-// Standard-Task
-exports.default = gulp.series(gulp.parallel(compileSCSS, processJS), serve);
+// Watch Files für Änderungen
+function watchFiles() {
+  gulp.watch(paths.scss.src, compileSCSS);
+  gulp.watch(paths.js.src, copyJS);
+  gulp.watch(paths.php.src).on('change', browserSync.reload);
+}
+
+// Task Definitionen
+gulp.task('scss', compileSCSS);
+gulp.task('scss:prod', compileSCSSProd);
+gulp.task('js', copyJS);
+gulp.task('server', startServer);
+gulp.task('watch', gulp.series(startServer, watchFiles));
+
+// Build Tasks
+gulp.task('build', gulp.series(
+  gulp.parallel(compileSCSS, copyJS)
+));
+
+gulp.task('build:prod', gulp.series(
+  gulp.parallel(compileSCSSProd, copyJS)
+));
+
+// Development Task (default)
+gulp.task('default', gulp.series(
+  gulp.parallel(compileSCSS, copyJS),
+  startServer,
+  watchFiles
+));
+
+// Einzelne Tasks für Testing (Platzhalter)
+gulp.task('test:scss', (done) => {
+  // Hier könnten SCSS-Tests integriert werden
+  done();
+});
+
+gulp.task('test:build', (done) => {
+  // Hier könnten Build-Tests integriert werden
+  done();
+});

@@ -1,92 +1,96 @@
-# Ravensbrueck Theme
+# VDKG WordPress Projekt
 
-Ein individuelles WordPress Child Theme basierend auf [Hello Elementor](https://elementor.com/hello-theme), optimiert für moderne Entwicklung mit [Vite](https://vitejs.dev/), SCSS und modularer Struktur.
-
-## 🚀 Features
-
-- ⚡️ Vite-Setup für schnelle Entwicklung und Builds
-- 🎨 SCSS-Struktur mit Autoprefixing und PostCSS
-- 📦 JavaScript mit ES6-Modulunterstützung
-- 🔧 Optimiertes Deployment via `npm run build`
-- 🧱 Sauber getrennte Codebasis (`src/`, `dist/`)
-- 🔄 Einfache Einbindung in WordPress über `functions.php`
+Modernes WordPress-Setup für lokale Entwicklung mit Docker, Composer und Gulp.  
+Enthält ein eigenes Theme (`vdkg-theme`) auf Basis von SCSS und Vanilla JavaScript.
 
 ---
 
-## 📁 Projektstruktur
+## Features
 
-```
-hello-child-theme/
-├── dist/             # Generierte CSS/JS-Dateien (nicht manuell bearbeiten)
-├── functions.php     # Enqueue der Vite-Bundles
-├── style.css         # Theme-Metadaten (leer, Pflicht für WordPress)
-├── src/
-│   ├── js/
-│   │   └── main.js   # Haupt-JavaScript-Datei
-│   └── scss/
-│       └── style.scss # Haupt-SCSS-Datei
-├── vite.config.js    # Vite-Konfiguration
-└── package.json      # Abhängigkeiten & Build-Skripte
-```
+- **Docker**: Lokale Entwicklungsumgebung mit WordPress, MySQL und phpMyAdmin
+- **Composer**: Verwaltung von WordPress, Themes und Plugins als Abhängigkeiten
+- **Gulp**: Automatisiertes Build-System für SCSS, JS und Live-Reload
+- **Stylelint & Prettier**: Code-Qualität und einheitlicher Stil für SCSS
+- **PHP CodeSniffer**: WordPress Coding Standards für PHP
 
 ---
 
-## ⚙️ Installation
+## Voraussetzungen
 
-### 1. 🔁 Repository klonen
-
-```bash
-git clone https://github.com/dein-benutzername/ravensbrueck-theme.git
-cd ravensbrueck-theme
-```
-
-### 2. 📦 Abhängigkeiten installieren
-
-```bash
-npm install
-```
-
-### 3. 💻 Entwicklung starten
-
-```bash
-npm run dev
-```
-
-→ Vite startet den Entwicklungsserver, kompiliert SCSS & JS live und schreibt nach `dist/`.
-
-### 4. 📦 Für den Live-Betrieb builden
-
-```bash
-npm run build
-```
-
-→ Minifizierte Produktionsergebnisse liegen dann in `dist/`.
+- [Docker](https://www.docker.com/)  
+- [Node.js & npm](https://nodejs.org/)  
+- [Composer](https://getcomposer.org/)
 
 ---
 
-## 🧩 Theme aktivieren
+## Installation
 
-1. Stelle sicher, dass das Parent-Theme **Hello Elementor** installiert ist.
-2. Kopiere dieses Theme in `wp-content/themes/hello-child-theme`
-3. Aktiviere es im WordPress-Backend unter _Design > Themes_.
+1. **Repository klonen**
+   ```sh
+   git clone <REPO-URL>
+   cd <Projektordner>
+   ```
+
+2. **Abhängigkeiten installieren**
+   ```sh
+   composer install
+   npm install
+   ```
+
+3. **Docker-Container starten**
+   ```sh
+   docker compose up
+   ```
+   - WordPress: [http://localhost:8080](http://localhost:8080)
+   - phpMyAdmin: [http://localhost:8081](http://localhost:8081)
+
+4. **Build-Tools starten (in neuem Terminal)**
+   ```sh
+   npm run dev
+   ```
+   - Automatisches Kompilieren von SCSS/JS und Live-Reload
 
 ---
 
-## 🧠 Hinweise
+## Theme-Entwicklung
 
-- Die Datei `style.css` enthält nur die Theme-Metadaten und wird **nicht für Styling verwendet**
-- SCSS & JS werden über `vite.config.js` verarbeitet – passe dort bei Bedarf Ein- & Ausgabe an
-- Das Theme funktioniert auch ohne Elementor, nutzt aber dessen Struktur und Kompatibilität
-
----
-
-## 👨‍💻 Autor
-
-**Matthias Seidel**  
-🔗 [doryo.de](https://www.doryo.de)
+- Das eigene Theme liegt unter:  
+  `wp-content/themes/vdkg-theme/`
+- Haupt-SCSS-Datei:  
+  `wp-content/themes/vdkg-theme/assets/scss/style.scss`
+- Kompilierte CSS/JS-Dateien landen in:  
+  `wp-content/themes/vdkg-theme/dist/`
 
 ---
 
-## 📜 Lizenz
+## Nützliche Befehle
 
-GNU General Public License v3.0 – siehe [LICENSE](https://www.gnu.org/licenses/gpl-3.0.html)
+| Befehl                | Beschreibung                                 |
+|-----------------------|----------------------------------------------|
+| `npm run dev`         | Entwicklungsmodus mit Watch & Live-Reload    |
+| `npm run build`       | Einmaliger Build (Entwicklung)               |
+| `npm run build:prod`  | Build für Produktion (minifiziert)           |
+| `npm run lint:css`    | SCSS-Code-Qualität prüfen                    |
+| `npm run format:css`  | SCSS-Code formatieren                        |
+| `npm run lint:php`    | PHP-Code-Qualität prüfen (WordPress-Standard)|
+| `npm run format:php`  | PHP-Code automatisch formatieren             |
+
+---
+
+## Hinweise
+
+- Uploads, Cache und generierte Dateien sind in `.gitignore` ausgeschlossen.
+- Plugins und Themes werden über Composer verwaltet.
+
+---
+
+## Autoren
+
+- Matthias Seidel  
+- [doryo.de](https://doryo.de)
+
+---
+
+## Lizenz
+
+Dieses Projekt ist privat und nicht für die öffentliche
