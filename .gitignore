@@ -26,7 +26,8 @@ package-lock.json
 /wp-content/plugins/*
 !/wp-content/plugins/.gitkeep
 /wp-content/themes/*
-!/wp-content/themes/doryo-theme/
+!/wp-content/themes/vdkg-theme/
+!/wp-content/themes/vdkg-theme/**
 
 # ─────────────────────────────
 # System & IDE

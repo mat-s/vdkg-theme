@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+// 1. Abstracts
+@import "abstracts/variables";
+@import "abstracts/functions";
+@import "abstracts/mixins";
+
+// 2. Vendors (Normalize from node_modules)
+@import "normalize.css/normalize";
+
+// 3. Base
+@import "base/reset";
+@import "base/typography";
+@import "base/base";
+
+// 4. Layout
+@import "layout/header";
+@import "layout/navigation";
+@import "layout/grid";
+@import "layout/section";
+@import "layout/footer";
+
+// 5. Components (keep only essentials)
+@import "components/buttons";
+@import "components/forms";
+@import "components/section-header";
+
+// 6. Pages (none by default for base theme)
+
+// 7. Themes
+@import "themes/default";
+
+// 8. Shame (temporary fixes)
+@import "shame";

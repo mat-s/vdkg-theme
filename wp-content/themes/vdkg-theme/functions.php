@@ -55,8 +55,6 @@ class VdkgTheme
     add_theme_support('custom-logo');
     add_theme_support('html5', [
       'search-form',
-      'comment-form',
-      'comment-list',
       'gallery',
       'caption',
     ]);
@@ -135,6 +133,9 @@ class VdkgTheme
     }, 10, 4);
 }
 }
+
+// Include comment disablement
+require_once get_stylesheet_directory() . '/inc/disable-comments.php';
 
 // Initialize the theme
 VdkgTheme::get_instance();

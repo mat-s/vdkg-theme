@@ -1,0 +1,9 @@
+.doryo-section {
+  padding: 1rem;
+  @include respond-to('tablet') {
+    padding: 2rem;
+  }
+  @include respond-to('desktop') {
+    padding: 4rem;
+  }
+}
