@@ -63,6 +63,10 @@
       }
     }
 
+    &__content {
+      margin-top: var(--spacing-sm, 0.5rem);
+    }
+
     .vdkg-slide__title,
     .vdkg-slide__text {
       display: inline;

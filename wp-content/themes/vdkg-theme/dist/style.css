@@ -2029,6 +2029,9 @@ select.form-control, .wpcf7-form select.wpcf7-text,
   width: auto;
   display: block;
 }
+.vdkg-slider .vdkg-slide__content {
+  margin-top: var(--spacing-sm, 0.5rem);
+}
 .vdkg-slider .vdkg-slide .vdkg-slide__title,
 .vdkg-slider .vdkg-slide .vdkg-slide__text {
   display: inline;
