@@ -28,17 +28,64 @@
       }
     }
 
+    // Helper: compute and set each slide width based on rendered image height + intrinsic ratio
+    function updateSlideWidths() {
+      var slides = $widget.find('.swiper-slide');
+      slides.each(function () {
+        var slideEl = this;
+        var img = $(slideEl).find('.vdkg-slide__image img')[0];
+        if (!img) return;
+
+        // Determine fixed rendered height
+        var h = img.clientHeight || img.naturalHeight || 0;
+        var w;
+        if (img.naturalWidth && img.naturalHeight) {
+          // Use intrinsic ratio when available
+          w = Math.max(1, Math.round((img.clientHeight || parseFloat(getComputedStyle(img).height) || img.naturalHeight) * (img.naturalWidth / img.naturalHeight)));
+        } else {
+          // Fallback to current layout width
+          w = img.clientWidth || $(slideEl).width();
+        }
+
+        // Apply width to slide and inner container so Swiper can measure it
+        slideEl.style.width = w + 'px';
+        var inner = $(slideEl).find('.vdkg-slide')[0];
+        if (inner) inner.style.width = w + 'px';
+      });
+    }
+
+    // Debounce helper
+    function debounce(fn, wait) {
+      var t; return function () { var args = arguments, ctx = this; clearTimeout(t); t = setTimeout(function(){ fn.apply(ctx, args); }, wait); };
+    }
+
     var instance = new Swiper($widget[0], {
       slidesPerView: 'auto',   // dynamic slide width based on content
       spaceBetween: 24,
       centeredSlides: true,    // center the active slide
       loop: false,
+      observer: true,
+      observeParents: true,
       navigation: {
         prevEl: $prev[0] || null,
         nextEl: $next[0] || null,
       },
     });
 
+    // Ensure widths are correct after images load
+    var $imgs = $widget.find('.vdkg-slide__image img');
+    var onImgLoad = debounce(function(){ updateSlideWidths(); if (instance && instance.update) instance.update(); }, 50);
+    $imgs.each(function(){ if (this.complete) { /* already loaded */ } else { this.addEventListener('load', onImgLoad, { once: true }); }});
+
+    // Initial calculation (in case images are cached)
+    updateSlideWidths();
+    instance.update();
+
+    // Recalculate on resize
+    var onResize = debounce(function(){ updateSlideWidths(); if (instance && instance.update) instance.update(); }, 100);
+    window.addEventListener('resize', onResize);
+
+    // Store instance
     $widget.data('vdkgSwiper', instance);
   }
 
