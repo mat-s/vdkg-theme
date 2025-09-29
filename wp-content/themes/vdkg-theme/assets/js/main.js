@@ -2,51 +2,53 @@
 (function () {
   "use strict";
 
-  /**
-   * Initializes the sticky header functionality.
-   * Adds or removes the sticky class to the header based on scroll position.
-   * Also considers the WordPress admin bar offset if present.
-   */
-  function initHeader() {
-    const header = document.querySelector(".doryo-header");
+  // Header init removed
 
-    if (!header) {
-      console.warn("Doryo Header not found");
-      return;
+  // ---------------------------------------------
+  // VDKG Slider Repeater (Elementor widget)
+  // ---------------------------------------------
+  function initVdkgSliderRepeater($scope, $) {
+    var $widget = $scope.find('.vdkg-slider.swiper');
+    if (!$widget.length) return;
+
+    // Avoid double init in editor rerenders
+    if ($widget.data('vdkgSwiper')) return;
+
+    var $prev = $widget.find('.vdkg-slider__prev');
+    var $next = $widget.find('.vdkg-slider__next');
+
+    // Guard if Swiper is missing
+    if (typeof Swiper === 'undefined') {
+      // Try Elementor's internal loader if available
+      if (elementorFrontend && elementorFrontend.utils && elementorFrontend.utils.swiper) {
+        // Fallback helper (older Elementor versions exposed a wrapper)
+      } else {
+        console.warn('[VDKG] Swiper not available for slider widget');
+        return;
+      }
     }
 
-    const threshold = 80; // px
-    const adminBar = document.getElementById("wpadminbar");
-    let ticking = false;
+    var instance = new Swiper($widget[0], {
+      slidesPerView: 'auto',   // dynamic slide width based on content
+      spaceBetween: 24,
+      centeredSlides: true,    // center the active slide
+      loop: false,
+      navigation: {
+        prevEl: $prev[0] || null,
+        nextEl: $next[0] || null,
+      },
+    });
 
-    const apply = () => {
-      const y = window.scrollY || window.pageYOffset || 0;
-      const makeSticky = y >= threshold;
-
-      header.classList.toggle("doryo-header--sticky", makeSticky);
-
-      // Optional: Adminbar-Offset berücksichtigen
-      if (makeSticky) {
-        const topOffset = adminBar ? adminBar.offsetHeight : 0;
-        header.style.top = topOffset ? `${topOffset}px` : "0";
-      } else {
-        header.style.top = "";
-      }
-      ticking = false;
-    };
-
-    const onScroll = () => {
-      if (!ticking) {
-        ticking = true;
-        requestAnimationFrame(apply);
-      }
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", apply, { passive: true });
-    window.addEventListener("load", apply);
-    apply(); // Initialer Zustand
+    $widget.data('vdkgSwiper', instance);
   }
+
+  // Hook into Elementor frontend init
+  jQuery(window).on('elementor/frontend/init', function () {
+    elementorFrontend.hooks.addAction(
+      'frontend/element_ready/vdkg_slider_repeater.default',
+      initVdkgSliderRepeater
+    );
+  });
 
   /**
    * Custom JavaScript for the Doryo Hero Unit Elementor widget.
@@ -420,10 +422,9 @@
 
   /**
    * Initializes all theme-related JavaScript functionality.
-   * Calls header and Elementor widget initializers.
+   * Calls Elementor widget initializers.
    */
   function initializeTheme() {
-    initHeader();
     initElementorHooks();
   }
 

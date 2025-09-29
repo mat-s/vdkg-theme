@@ -29,9 +29,11 @@ class VdkgTheme
 
   private function __construct()
   {
-    add_action('wp_enqueue_scripts', [$this, 'enqueue_assets'], 999);
+    add_action('wp_enqueue_scripts', [$this, 'enqueue_assets'], 20);
     add_action('admin_enqueue_scripts', [$this, 'enqueue_admin_assets']);
     add_action('after_setup_theme', [$this, 'theme_setup']);
+    // Ensure styles also load inside Elementor (including Canvas template/editor)
+    add_action('elementor/frontend/after_enqueue_styles', [$this, 'enqueue_elementor_styles']);
 
     // Initialize Elementor Widgets
     $this->init_elementor_widgets();
@@ -89,6 +91,19 @@ class VdkgTheme
         ['jquery'],
         filemtime(get_stylesheet_directory() . '/dist/main.js'),
         true
+      );
+    }
+  }
+
+  // Load child styles when Elementor editor/canvas enqueues assets
+  public function enqueue_elementor_styles()
+  {
+    if (!wp_style_is('vdkg-theme-style', 'enqueued')) {
+      wp_enqueue_style(
+        'vdkg-theme-style',
+        get_stylesheet_directory_uri() . '/dist/style.css',
+        [],
+        filemtime(get_stylesheet_directory() . '/dist/style.css')
       );
     }
   }

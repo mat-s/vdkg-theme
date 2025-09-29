@@ -31,7 +31,8 @@ class WidgetManager {
      * Register custom widgets
      */
     public function register_widgets($widgets_manager) {
-        // Base theme: no custom widgets registered by default.
-        // Add your widgets here in future projects.
+        // Register custom widgets here
+        require_once __DIR__ . '/SliderRepeater.php';
+        $widgets_manager->register( new \VdkgTheme\Widgets\SliderRepeater() );
     }
 }

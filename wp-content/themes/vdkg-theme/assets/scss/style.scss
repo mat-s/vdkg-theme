@@ -5,30 +5,25 @@
 @import "abstracts/functions";
 @import "abstracts/mixins";
 
-// 2. Vendors (Normalize from node_modules)
-@import "normalize.css/normalize";
-
-// 3. Base
+// 2. Base
 @import "base/reset";
 @import "base/typography";
 @import "base/base";
 
-// 4. Layout
+// 3. Layout
 @import "layout/header";
 @import "layout/navigation";
 @import "layout/grid";
-@import "layout/section";
-@import "layout/footer";
 
-// 5. Components (keep only essentials)
+// 4. Components (keep only essentials)
 @import "components/buttons";
 @import "components/forms";
-@import "components/section-header";
+@import "components/vdkg-slider";
 
-// 6. Pages (none by default for base theme)
+// 5. Pages (none by default for base theme)
 
-// 7. Themes
+// 6. Themes
 @import "themes/default";
 
-// 8. Shame (temporary fixes)
+// 7. Shame (temporary fixes)
 @import "shame";

@@ -1,0 +1,83 @@
+// VDKG Slider (Elementor widget `vdkg_slider_repeater`) — BEM + nested SCSS
+
+.vdkg-slider {
+  --vdkg-slider-image-height: 420px; // default, can be overridden per context
+
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+
+  // Swiper structure inside the block
+  .swiper-wrapper { align-items: stretch; }
+  .swiper-slide { height: auto; width: auto; }
+
+  // Block elements
+  &__nav {
+    pointer-events: none; // let inner buttons receive clicks only
+    position: absolute;
+    inset: 0;
+
+    .vdkg-slider__prev,
+    .vdkg-slider__next {
+      pointer-events: auto;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s ease;
+      z-index: 100;
+
+      &:hover { background: #fff; }
+
+      // SVG from Elementor Icons Manager
+      svg, i { font-size: 18px; width: 18px; height: 18px; }
+    }
+
+    .vdkg-slider__prev { left: 8px; }
+    .vdkg-slider__next { right: 8px; }
+  }
+
+  // Nested widget content block
+  .vdkg-slide {
+    &__link {
+      color: inherit;
+      text-decoration: none;
+      outline: none;
+      &:focus-visible { outline: 2px solid var(--e-global-color-accent, #ff7a00); outline-offset: 2px; }
+    }
+
+    &__image {
+      img {
+        height: var(--vdkg-slider-image-height);
+        width: auto;
+        display: block;
+      }
+    }
+
+    .vdkg-slide__title,
+    .vdkg-slide__text {
+      display: inline;
+      font-size: var(--font-size-base, 1rem);
+      line-height: var(--line-height-normal, 1.5);
+      font-weight: var(--font-weight-normal, 400);
+    }
+
+    &__title {
+      color: var(--e-global-color-accent, #ff7a00); // orange title
+    }
+  }
+}
+
+// Responsive image height adjustments (override the CSS variable)
+@media (max-width: 1280px) { .vdkg-slider { --vdkg-slider-image-height: 380px; } }
+@media (max-width: 900px)  { .vdkg-slider { --vdkg-slider-image-height: 320px; } }
+@media (max-width: 640px)  { .vdkg-slider { --vdkg-slider-image-height: 260px; } }
