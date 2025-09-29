@@ -151,6 +151,8 @@ class VdkgTheme
 
 // Include comment disablement
 require_once get_stylesheet_directory() . '/inc/disable-comments.php';
+// Include custom post types
+require_once get_stylesheet_directory() . '/inc/cpt-member.php';
 
 // Initialize the theme
 VdkgTheme::get_instance();
