@@ -1,0 +1,18 @@
+<wpml-config>
+  <elementor-widgets>
+    <widget name="vdkg_media_text">
+      <fields>
+        <field type="Title" editor_type="LINE">title</field>
+        <field type="Text" editor_type="VISUAL">text</field>
+      </fields>
+    </widget>
+
+    <widget name="vdkg_slider_repeater">
+      <fields-in-item items_of="slides">
+        <field type="Title" editor_type="LINE">title</field>
+        <field type="Text" editor_type="AREA">text</field>
+      </fields-in-item>
+    </widget>
+  </elementor-widgets>
+</wpml-config>
+

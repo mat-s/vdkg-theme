@@ -63,7 +63,7 @@
       slidesPerView: 'auto',   // dynamic slide width based on content
       spaceBetween: 24,
       centeredSlides: true,    // center the active slide
-      loop: false,
+      loop: true,
       observer: true,
       observeParents: true,
       navigation: {

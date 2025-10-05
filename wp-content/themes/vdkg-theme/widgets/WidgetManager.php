@@ -34,7 +34,9 @@ class WidgetManager {
         // Register custom widgets here
         require_once __DIR__ . '/SliderRepeater.php';
         require_once __DIR__ . '/MediaText.php';
+        require_once __DIR__ . '/MembersList.php';
         $widgets_manager->register( new \VdkgTheme\Widgets\SliderRepeater() );
         $widgets_manager->register( new \VdkgTheme\Widgets\MediaText() );
+        $widgets_manager->register( new \VdkgTheme\Widgets\MembersList() );
     }
 }
