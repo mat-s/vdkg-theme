@@ -60,24 +60,27 @@ class MembersList extends Widget_Base
     if (!$q->have_posts()) {
       return;
     }
-
-    echo '<div class="vdkg-members-list">';
-    echo '<ul class="vdkg-members-list__grid">';
-    foreach ($q->posts as $post_id) {
-      $title = get_the_title($post_id);
-      $url   = get_permalink($post_id);
-      echo '<li class="vdkg-members-list__item">';
-      echo '<a class="vdkg-members-list__link" href="' . esc_url($url) . '">' . esc_html($title) . '</a>';
-      echo '</li>';
-    }
-    echo '</ul>';
-    echo '</div>';
+    $ids = $q->posts;
+?>
+    <div class="vdkg-members-list">
+      <ul class="vdkg-members-list__grid">
+        <?php foreach ($ids as $post_id) :
+          $title = get_the_title($post_id);
+          $url   = get_permalink($post_id);
+        ?>
+          <li class="vdkg-members-list__item">
+            <a class="vdkg-members-list__link" href="<?php echo esc_url($url); ?>"><?php echo esc_html($title); ?></a>
+          </li>
+        <?php endforeach; ?>
+      </ul>
+    </div>
+  <?php
   }
 
   protected function content_template()
   {
     // Editor preview: show placeholder when no query available
-?>
+  ?>
     <div class="vdkg-members-list">
       <ul class="vdkg-members-list__grid">
         <li class="vdkg-members-list__item"><a class="vdkg-members-list__link" href="#">Lorem Ipsum</a></li>

@@ -149,6 +149,12 @@ class VdkgTheme
 }
 }
 
+function my_acf_init() {
+  acf_update_setting('google_api_key', 'AIzaSyCXs2PjI1FCoypreAq3durpBW9CIoA1G_I');
+}
+
+add_action('acf/init', 'my_acf_init');
+
 // Include comment disablement
 require_once get_stylesheet_directory() . '/inc/disable-comments.php';
 // Include custom post types

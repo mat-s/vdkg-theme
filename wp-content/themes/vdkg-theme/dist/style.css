@@ -2097,12 +2097,21 @@ select.form-control, .wpcf7-form select.wpcf7-text,
     gap: var(--spacing-2xl, 2rem);
   }
 }
+.vdkg-members-list {
+  display: block;
+  width: 100%;
+  max-width: none;
+}
 .vdkg-members-list__grid {
+  display: block;
+  width: 100%;
+  max-width: none;
   column-count: 3;
   column-gap: var(--spacing-5xl, 4rem);
   list-style: none;
   margin: 0;
   padding: 0;
+  column-fill: balance;
 }
 .vdkg-members-list__item {
   break-inside: avoid;

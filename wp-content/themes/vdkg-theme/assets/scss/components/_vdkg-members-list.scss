@@ -1,12 +1,19 @@
 // VDKG Members List (Elementor widget `vdkg_members_list`)
 
 .vdkg-members-list {
+  display: block;
+  width: 100%;
+  max-width: none;
   &__grid {
+    display: block;
+    width: 100%;
+    max-width: none;
     column-count: 3;
     column-gap: var(--spacing-5xl, 4rem);
     list-style: none;
     margin: 0;
     padding: 0;
+    column-fill: balance;
   }
 
   &__item {
@@ -32,4 +39,3 @@
 @media (max-width: 640px) {
   .vdkg-members-list__grid { column-count: 1; }
 }
-
