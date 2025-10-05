@@ -60,10 +60,10 @@
     }
 
     var instance = new Swiper($widget[0], {
-      slidesPerView: 'auto', 
-      spaceBetween: 14,
-      centeredSlides: true,    
-      loop: true,
+      slidesPerView: 'auto',   // dynamic slide width based on content
+      spaceBetween: 24,
+      centeredSlides: true,    // center the active slide
+      loop: false,
       observer: true,
       observeParents: true,
       navigation: {

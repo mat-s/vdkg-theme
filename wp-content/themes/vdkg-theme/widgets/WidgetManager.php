@@ -33,6 +33,8 @@ class WidgetManager {
     public function register_widgets($widgets_manager) {
         // Register custom widgets here
         require_once __DIR__ . '/SliderRepeater.php';
+        require_once __DIR__ . '/MediaText.php';
         $widgets_manager->register( new \VdkgTheme\Widgets\SliderRepeater() );
+        $widgets_manager->register( new \VdkgTheme\Widgets\MediaText() );
     }
 }

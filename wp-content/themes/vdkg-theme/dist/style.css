@@ -2058,6 +2058,45 @@ select.form-control, .wpcf7-form select.wpcf7-text,
     --vdkg-slider-image-height: 260px;
   }
 }
+.vdkg-media-text {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-4xl, 3rem);
+  align-items: start;
+}
+.vdkg-media-text__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.vdkg-media-text__content {
+  padding-top: 3rem;
+}
+.vdkg-media-text__title {
+  margin: 0 0 var(--spacing-base, 1rem) 0;
+  color: var(--e-global-color-text, currentColor);
+  font-weight: var(--font-weight-semibold, 600);
+  line-height: var(--line-height-relaxed, 1.5);
+  font-size: var(--font-size-lg, 1.125rem);
+  text-transform: uppercase;
+}
+.vdkg-media-text__text {
+  font-size: var(--font-size-base, 1rem);
+  line-height: var(--line-height-relaxed, 1.5);
+}
+.vdkg-media-text--image-right .vdkg-media-text__media {
+  order: 2;
+}
+.vdkg-media-text--image-right .vdkg-media-text__content {
+  order: 1;
+}
+
+@media (max-width: 900px) {
+  .vdkg-media-text {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-2xl, 2rem);
+  }
+}
 @media (prefers-color-scheme: dark) {
   :root {
     --color-white: #1a1a1a;

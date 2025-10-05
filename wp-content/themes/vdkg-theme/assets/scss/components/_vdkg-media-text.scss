@@ -1,0 +1,49 @@
+// VDKG Media + Text (Elementor widget `vdkg_media_text`)
+
+.vdkg-media-text {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-4xl, 3rem);
+  align-items: start;
+
+  &__media {
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &__content { 
+    padding-top: 3rem;    
+   }
+
+  &__title {
+    margin: 0 0 var(--spacing-base, 1rem) 0;
+    color: var(--e-global-color-text, currentColor);
+    font-weight: var(--font-weight-semibold, 600);
+    line-height: var(--line-height-relaxed, 1.5);
+    font-size: var(--font-size-lg, 1.125rem);
+    text-transform: uppercase;
+  }
+
+  &__text {
+    font-size: var(--font-size-base, 1rem);
+    line-height: var(--line-height-relaxed, 1.5);
+  }
+
+  // Modifier to place image on the right
+  &--image-right {
+    .vdkg-media-text__media { order: 2; }
+    .vdkg-media-text__content { order: 1; }
+  }
+}
+
+// Responsive: stack on smaller screens
+@media (max-width: 900px) {
+  .vdkg-media-text {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-2xl, 2rem);
+  }
+}
+
